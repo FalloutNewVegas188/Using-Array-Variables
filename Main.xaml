@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1514,1608" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Main" VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="852,1698.4" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -27,6 +27,8 @@
       <x:String>GlobalConstantsNamespace</x:String>
       <x:String>System.Reflection</x:String>
       <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>System.Linq.Expressions</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -70,33 +72,43 @@
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>UiPath.Workflow</AssemblyReference>
       <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>System.Private.ServiceModel</AssemblyReference>
+      <AssemblyReference>System.Collections</AssemblyReference>
+      <AssemblyReference>System.Collections.NonGeneric</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Formatters</AssemblyReference>
+      <AssemblyReference>System.Private.DataContractSerialization</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization.Primitives</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Flight Reservations" sap:VirtualizedContainerService.HintSize="496,1543" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Flight Reservations" sap:VirtualizedContainerService.HintSize="496,1633.6" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:String" Name="Destination" />
       <Variable x:TypeArguments="x:String" Name="Departure" />
       <Variable x:TypeArguments="x:String" Name="ReturnDate" />
       <Variable x:TypeArguments="s:String[]" Name="FlightDetails" />
-      <Variable x:TypeArguments="x:Object" Name="_out_InputDialog_3__Result" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input Destination Option" sap:VirtualizedContainerService.HintSize="434,292" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please select the following Destination location offered below." Options="[{&quot;New York&quot;, &quot;London&quot;, &quot;Barcelona&quot;, &quot;Bucharest&quot;, &quot;New Delhi&quot;}]" Title="Destination Location Options">
+    <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input Destination Option" sap:VirtualizedContainerService.HintSize="433.6,327.2" sap2010:WorkflowViewState.IdRef="InputDialog_1" IsPassword="False" Label="Please select the following Destination location offered below." Options="[{&quot;New York&quot;, &quot;London&quot;, &quot;Barcelona&quot;, &quot;Bucharest&quot;, &quot;New Delhi&quot;}]" Title="Destination Location Options">
       <ui:InputDialog.Result>
         <OutArgument x:TypeArguments="x:String">[Destination]</OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
-    <ui:InputDialog OptionsString="{x:Null}" Result="{x:Null}" DisplayName="Input Departure Option" sap:VirtualizedContainerService.HintSize="434,292" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Please select the following Departure locations" Options="[{&quot;LAX&quot;, &quot;Ontario International&quot;, &quot;John Wayne International&quot;}]" Title="Select Your Departure Location" />
-    <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input Return Options" sap:VirtualizedContainerService.HintSize="434,292" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Please select the following available Departure date" Options="[{&quot;Oct 24&quot;, &quot;Oct 26&quot;, &quot;Oct 30&quot;}]" Title="Select your Departure Date">
+    <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input Departure Option" sap:VirtualizedContainerService.HintSize="433.6,327.2" sap2010:WorkflowViewState.IdRef="InputDialog_2" IsPassword="False" Label="Please select the following Departure locations" Options="[{&quot;LAX&quot;, &quot;Ontario International&quot;, &quot;John Wayne International&quot;}]" Title="Select Your Departure Location">
       <ui:InputDialog.Result>
-        <OutArgument x:TypeArguments="x:Object">[_out_InputDialog_3__Result]</OutArgument>
+        <OutArgument x:TypeArguments="x:String">[Departure]</OutArgument>
       </ui:InputDialog.Result>
     </ui:InputDialog>
-    <Assign sap:VirtualizedContainerService.HintSize="434,82" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <ui:InputDialog OptionsString="{x:Null}" DisplayName="Input Return Options" sap:VirtualizedContainerService.HintSize="433.6,327.2" sap2010:WorkflowViewState.IdRef="InputDialog_3" IsPassword="False" Label="Please select the following available Departure date" Options="[{&quot;Oct 24&quot;, &quot;Oct 26&quot;, &quot;Oct 30&quot;}]" Title="Select your Departure Date">
+      <ui:InputDialog.Result>
+        <OutArgument x:TypeArguments="x:String">[ReturnDate]</OutArgument>
+      </ui:InputDialog.Result>
+    </ui:InputDialog>
+    <Assign sap:VirtualizedContainerService.HintSize="433.6,113.6" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="s:String[]">[FlightDetails]</OutArgument>
       </Assign.To>
@@ -104,7 +116,8 @@
         <InArgument x:TypeArguments="s:String[]">[{Destination, Departure, ReturnDate}]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="FoundFlights_array.txt" sap:VirtualizedContainerService.HintSize="434,133" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[&quot;Your flight to &quot; + FlightDetails(0) + &quot;is scheduled for &quot; + FlightDetails(1) + &quot;and your return flight is scheduled for &quot; + FlightDetails(2) + &quot;.&quot;]" />
-    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,141" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Reservation details have been successfully generated as a text file.&quot;]" />
+    <ui:WriteTextFile File="{x:Null}" DisplayName="Write Text File" FileName="FoundFlights_array.txt" sap:VirtualizedContainerService.HintSize="433.6,166.4" sap2010:WorkflowViewState.IdRef="WriteTextFile_1" Text="[&quot;Your flight to &quot; + FlightDetails(0) + &quot;is scheduled for &quot; + FlightDetails(1) + &quot;and your return flight is scheduled for &quot; + FlightDetails(2) + &quot;.&quot;]" />
+    <ui:MessageBox Caption="{x:Null}" ChosenButton="{x:Null}" AutoCloseAfter="00:00:00" DisplayName="Message Box" sap:VirtualizedContainerService.HintSize="433.6,117.6" sap2010:WorkflowViewState.IdRef="MessageBox_1" Text="[&quot;Your flight to &quot; + FlightDetails(0) + &quot;is scheduled for &quot; + FlightDetails(1) + &quot;and your return flight is scheduled for &quot; + FlightDetails(2) + &quot;.&quot;]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="433.6,165.6" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="[UiPath.Core.Activities.LogLevel.Info]" Message="[&quot;Reservation details have been successfully generated as a text file.&quot;]" />
   </Sequence>
 </Activity>
